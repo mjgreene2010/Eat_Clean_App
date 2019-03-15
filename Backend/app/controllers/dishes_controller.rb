@@ -22,19 +22,24 @@ class DishesController < ApplicationController
     end
 
     def update
-        # @dish= Dish.find(params[.id])
-        # dish.update(dish_params)
-        # redirect_to cars_path
+        @dish= Dish.find(params[:id])
+        @dish.update(dish_update_params)
+        render json: @dish
+        
     end
 
     def destroy
-        @dish= Dish.find(params[:id])
-        dish.destroy
-        redirect_to dishes_path
+        @dishes= Dish.find(params[:id]).destroy
+        # dishes.destroy
+        render json: @dishes
     end
 
     def dish_params
         params.permit(:name, :description)
+    end
+
+    def dish_update_params
+        params.permit(:description)
     end
 
 end

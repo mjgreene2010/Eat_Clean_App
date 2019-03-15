@@ -1,107 +1,77 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router";
+import Dish from "./Dish";
 
-export default class DishIndex extends Component {
-  state = {
-    onClick: false,
-    dishName: "sushi",
-    dishDescription: "Free salmonella roll"
-  };
+// rails s -p 5000
 
-  postDish = () => {
-    fetch("http://localhost:5000/dishes/", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name: this.state.dishName,
-        description: this.state.dishDescription
+export default withRouter(
+  class DishIndex extends Component {
+    state = { isEdit: false, description: "" };
+
+    updateDescription = () => {
+      let data = { description: this.state.description };
+      fetch(`http://localhost:5000/dishes/${this.props.dish.id}`, {
+        method: "PUT",
+
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
       })
-    }).then(res => res.json().then(res => res.name, res.description));
-  };
-
-  handleNameChange = e => {
-    this.setState({ dishName: e.target.value });
-  };
-
-  handleDescriptionChange = e => {
-    this.setState({ dishDescription: e.target.value });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    // if (this.state.dishinfo.name && this.state.dishinfo.description)
-    fetch("http://localhost:5000/dishes/", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name: this.state.dishName,
-        description: this.state.dishDescription
-      })
-    }).then(res => console.log(res));
-    // (res => res.json().then(res => res.name, res.description));
-    console.log(this.state);
-  };
-
-  render() {
-    let style = {
-      color: "red",
-      marginLeft: "5px",
-      padding: "5px"
+        .then(res => res.json())
+        .then(() => this.props.allDishes())
+        .then(() => this.setState({ isEdit: false }));
     };
-    console.log(this.state.dishName);
-    console.log(this.state.dishDescription);
-    return (
-      <div>
+
+    render() {
+      console.log(this.props.dish);
+      return (
         <div>
-          {this.state.onClick ? (
+          {/* <Dish key={dish.id} dish={this.props.dish} /> */}
+          {this.state.isEdit ? (
             <div>
-              <form className="dishForm" onSubmit={e => this.handleSubmit(e)}>
-                <div>
-                  <label>
-                    Name:
-                    <input
-                      name="name"
-                      type="text"
-                      value={this.state.dishName}
-                      required
-                      onChange={e => this.handleNameChange(e)}
-                    />
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    Description:
-                    <input
-                      name="description"
-                      type="text"
-                      required
-                      value={this.state.dishDescription}
-                      onChange={e => this.handleDescriptionChange(e)}
-                    />
-                  </label>
-                </div>
-                <div>
-                  <input type="submit" />
-                </div>
-              </form>
+              <form>
+                <label>
+                  Description:
+                  <input
+                    defaultValue={this.props.dish.description}
+                    onChange={e =>
+                      this.setState({ description: e.target.value })
+                    }
+                  />
+                </label>
+                <input
+                  type="submit"
+                  onClick={e => {
+                    e.preventDefault();
+                    this.updateDescription();
+                  }}
+                />
+              </form>{" "}
             </div>
           ) : (
             <div>
-              <button
-                onClick={() => this.setState({ onClick: !this.state.onClick })}
-                style={style}
-              >
-                Create
-              </button>
+              <h2>
+                {/* Name: */}
+                {this.props.dish.name}{" "}
+                <button
+                  style={{ position: "10px" }}
+                  onClick={() => this.setState({ isEdit: true })}
+                >
+                  edit
+                </button>{" "}
+                <button
+                  style={{ position: "10px" }}
+                  onClick={() => this.props.deleteDish(this.props.dish.id)}
+                >
+                  x
+                </button>
+              </h2>
+              <p>Description: {this.props.dish.description} </p>
             </div>
           )}
         </div>
-      </div>
-    );
+      );
+    }
   }
-}
+);

@@ -4,13 +4,7 @@ export default class Dish extends Component {
   render() {
     return (
       <div>
-        {/* <form>
-          Name:
-          <input />
-          Description:
-          <input />
-          <button>Next</button>
-        </form> */}
+        <p>dish</p>
       </div>
     );
   }

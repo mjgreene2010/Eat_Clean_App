@@ -7,9 +7,9 @@ export default class Nav extends Component {
   render() {
     const link = {
       width: "50px",
-      padding: "10px",
+      padding: "7px",
       margin: "0 6px 6px",
-      background: "blue",
+      background: "tan",
       textDecoration: "none",
       color: "white",
       borderRadius: "5px",
@@ -22,7 +22,7 @@ export default class Nav extends Component {
           exact
           style={link}
           activeStyle={{
-            background: "black"
+            background: "brown"
           }}
         >
           Login
@@ -32,20 +32,20 @@ export default class Nav extends Component {
           exact
           style={link}
           activeStyle={{
-            background: "black"
+            background: "brown"
           }}
         >
           Home
         </NavLink>
         <NavLink
-          to="/index"
+          to="/dish"
           exact
           style={link}
           activeStyle={{
-            background: "black"
+            background: "brown"
           }}
         >
-          Dishes
+          Dish
         </NavLink>
       </div>
     );

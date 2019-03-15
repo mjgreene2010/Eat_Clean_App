@@ -12,7 +12,7 @@ ReactDOM.render(
   <Router>
     <React.Fragment>
       <Nav />
-      <Route path="/" component={Home} />
+      <Route exact path="/" component={Home} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/index" component={DishIndex} />
       <Route exact path="/dish" component={Dish} />
