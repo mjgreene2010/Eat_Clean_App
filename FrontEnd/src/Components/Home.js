@@ -40,7 +40,9 @@ export default class Home extends Component {
         name: this.state.dishName,
         description: this.state.dishDescription
       })
-    }).then(res => this.allDishes());
+    })
+      .then(res => this.allDishes())
+      .then(() => this.setState({ onClick: false }));
   };
 
   // Read

@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 export default class Nav extends Component {
   render() {
     const link = {
-      width: "50px",
+      width: "100px",
       padding: "7px",
       margin: "0 6px 6px",
       background: "tan",

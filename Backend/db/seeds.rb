@@ -5,114 +5,157 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Dish.destroy_all
+Ingredient.destroy_all
+
+dishes=[
+    {
+        "name": "Macaroni & Cheese",
+         "description": "Good in taste, but it does pack on the calories"
+    },
+    {
+        "name": "Salad",
+        "description": "A great option for breakfase, brunch, and lunch"
+    }
+]
+
+
+
+dishes = dishes.map do |dish|
+    Dish.create(dish)
+end
 
 ingredients = [
     {
-    ndbno: "09427",
-    name: "Abiyuch, raw",
-    weight: 114,
-    measure: "0.5 cup",
-    nutrients: [
-        {
-        nutrient_id: "208",
-        nutrient: "Energy",
-        unit: "kcal",
-        value: "79",
-        gm: 69
-        },
-        {
-        nutrient_id: "269",
-        nutrient: "Sugars, total",
-        unit: "g",
-        value: "9.75",
-        gm: 8.55
-        },
-         {
-        nutrient_id: "204",
-        nutrient: "Total lipid (fat)",
-        unit: "g",
-        value: "0.11",
-        gm: 0.1
-        },
-        {
-        nutrient_id: "205",
-        nutrient: "Carbohydrate, by difference",
-        unit: "g",
-        value: "20.06",
-        gm: 17.6
-        }
-        ]
+        "name": "Abiyuch, raw",
+        "measurement": "0.5 cup",
+        "dish": dishes[0]
     },
+
     {
-    ndbno: "09002",
-    name: "Acerola juice, raw",
-    weight: 242,
-    measure: "1.0 cup",
-    nutrients: [
+        "name": "Acerola juice, raw",
+        "measurement": "1 cup",
+        "dish": dishes[0]
+    },
+
     {
-        nutrient_id: "208",
-        nutrient: "Energy",
-        unit: "kcal",
-        value: "56",
-        gm: 23
-        },
-        {
-        nutrient_id: "269",
-        nutrient: "Sugars, total",
-        unit: "g",
-        value: "10.89",
-        gm: 4.5
-        },
-        {
-        nutrient_id: "204",
-        nutrient: "Total lipid (fat)",
-        unit: "g",
-        value: "0.73",
-        gm: 0.3
-        },
-        {
-        nutrient_id: "205",
-        nutrient: "Carbohydrate, by difference",
-        unit: "g",
-        value: "11.62",
-        gm: 4.8
-        }
-        ]
-        },
-    {
-    ndbno: "09001",
-    name: "Acerola, (west indian cherry), raw",
-    weight: 98,
-    measure: "1.0 cup",
-        nutrients: [
-            {
-            nutrient_id: "208",
-            nutrient: "Energy",
-            unit: "kcal",
-            value: "31",
-            gm: 32
-            },
-            {
-            nutrient_id: "269",
-            nutrient: "Sugars, total",
-            unit: "g",
-            value: "--",
-            gm: "--"
-            },
-            {
-            nutrient_id: "204",
-            nutrient: "Total lipid (fat)",
-            unit: "g",
-            value: "0.29",
-            gm: 0.3
-            },
-            {
-            nutrient_id: "205",
-            nutrient: "Carbohydrate, by difference",
-            unit: "g",
-            value: "7.54",
-            gm: 7.69
-            }
-            ]
-            }
+        "name": "Acerola, (west indian cherry), raw",
+        "measurement": "1 cup",
+        "dish": dishes[1]
+    }
+]
+
+ingredients.each do |ingredient|
+    Ingredient.create(ingredient)
+end
+
+# ingredients = [
+#     {
+#     ndbno: "09427",
+#     name: "Abiyuch, raw",
+#     weight: 114,
+#     measure: "0.5 cup",
+#     nutrients: [
+#         {
+#         nutrient_id: "208",
+#         nutrient: "Energy",
+#         unit: "kcal",
+#         value: "79",
+#         gm: 69
+#         },
+#         {
+#         nutrient_id: "269",
+#         nutrient: "Sugars, total",
+#         unit: "g",
+#         value: "9.75",
+#         gm: 8.55
+#         },
+#          {
+#         nutrient_id: "204",
+#         nutrient: "Total lipid (fat)",
+#         unit: "g",
+#         value: "0.11",
+#         gm: 0.1
+#         },
+#         {
+#         nutrient_id: "205",
+#         nutrient: "Carbohydrate, by difference",
+#         unit: "g",
+#         value: "20.06",
+#         gm: 17.6
+#         }
+#         ]
+#     },
+#     {
+#     ndbno: "09002",
+#     name: "Acerola juice, raw",
+#     weight: 242,
+#     measure: "1.0 cup",
+#     nutrients: [
+#     {
+#         nutrient_id: "208",
+#         nutrient: "Energy",
+#         unit: "kcal",
+#         value: "56",
+#         gm: 23
+#         },
+#         {
+#         nutrient_id: "269",
+#         nutrient: "Sugars, total",
+#         unit: "g",
+#         value: "10.89",
+#         gm: 4.5
+#         },
+#         {
+#         nutrient_id: "204",
+#         nutrient: "Total lipid (fat)",
+#         unit: "g",
+#         value: "0.73",
+#         gm: 0.3
+#         },
+#         {
+#         nutrient_id: "205",
+#         nutrient: "Carbohydrate, by difference",
+#         unit: "g",
+#         value: "11.62",
+#         gm: 4.8
+#         }
+#         ]
+#         },
+#     {
+#     ndbno: "09001",
+#     name: "Acerola, (west indian cherry), raw",
+#     weight: 98,
+#     measure: "1.0 cup",
+#         nutrients: [
+#             {
+#             nutrient_id: "208",
+#             nutrient: "Energy",
+#             unit: "kcal",
+#             value: "31",
+#             gm: 32
+#             },
+#             {
+#             nutrient_id: "269",
+#             nutrient: "Sugars, total",
+#             unit: "g",
+#             value: "--",
+#             gm: "--"
+#             },
+#             {
+#             nutrient_id: "204",
+#             nutrient: "Total lipid (fat)",
+#             unit: "g",
+#             value: "0.29",
+#             gm: 0.3
+#             },
+#             {
+#             nutrient_id: "205",
+#             nutrient: "Carbohydrate, by difference",
+#             unit: "g",
+#             value: "7.54",
+#             gm: 7.69
+#             }
+#             ]
+#             }
     

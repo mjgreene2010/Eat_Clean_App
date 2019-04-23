@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
-import Dish from "./Dish";
+import { Link } from "react-router-dom";
+// import Dish from "./Dish";
 
 // rails s -p 5000
 
@@ -24,7 +25,6 @@ export default withRouter(
     };
 
     render() {
-      console.log(this.props.dish);
       return (
         <div>
           {/* <Dish key={dish.id} dish={this.props.dish} /> */}
@@ -53,7 +53,12 @@ export default withRouter(
             <div>
               <h2>
                 {/* Name: */}
-                {this.props.dish.name}{" "}
+                <Link
+                  to={`/dish/${this.props.dish.id}`}
+                  activeClassName="active"
+                >
+                  {this.props.dish.name}{" "}
+                </Link>
                 <button
                   style={{ position: "10px" }}
                   onClick={() => this.setState({ isEdit: true })}
